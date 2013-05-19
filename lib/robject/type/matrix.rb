@@ -1,5 +1,7 @@
 module RObject
   class Matrix < Base
+    include Helper::MatrixMultiply
+
     def self.match? robj, type
       type == 'matrix'
     end

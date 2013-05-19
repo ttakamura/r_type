@@ -1,6 +1,8 @@
 require 'rsruby'
 require 'delegate'
 require File.expand_path('../robject/version', __FILE__)
+require File.expand_path('../robject/helper', __FILE__)
+require File.expand_path('../robject/core_ext', __FILE__)
 require File.expand_path('../robject/r', __FILE__)
 require File.expand_path('../robject/base', __FILE__)
 require File.expand_path('../robject/convert', __FILE__)
