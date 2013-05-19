@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../lib/robject', __FILE__)
+
+begin
+  require 'pry'
+rescue LoadError => e
+  require 'irb'
+end
+
+if defined? Pry
+  RObject::R.run do
+    Pry.start binding, print: ->(output, value){ output.puts "=> #{value.inspect}" }
+  end
+else
+  RObject::R.run do
+    IRB.start
+  end
+end
