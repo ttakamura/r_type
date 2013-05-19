@@ -9,3 +9,4 @@ before_install:
  - sudo apt-add-repository -y ppa:marutter/rdev
  - sudo apt-get update -qq
  - sudo apt-get install -qq r-base-dev
+ - bundle config build.rsruby --with-R-include=/usr/share/R/include
