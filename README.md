@@ -1,4 +1,4 @@
-# RObject
+# RObject [![Build Status](https://travis-ci.org/ttakamura/robject.png?branch=master)](https://travis-ci.org/ttakamura/robject)
 
 RObject is a wrapper library for RSRuby.
 

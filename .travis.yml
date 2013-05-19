@@ -1,3 +1,5 @@
+env:
+  - R_HOME=/usr/lib/R
 rvm:
   - 2.0.0
 gemfile:
