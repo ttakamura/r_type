@@ -27,14 +27,28 @@ describe RObject::Matrix do
       it      { should == result }
     end
 
-    context 'robj * ruby-obj' do
+    context 'robj * ruby-array' do
+      let(:result) { [120, 340] }
+      before  { rsruby_func_stub rsruby, '%*%', [matrix, [100, 10]], result }
+      subject { matrix * [100, 10] }
+      it      { should == result }
+    end
+
+    context 'ruby-array * robj' do
+      let(:result) { [120, 340] }
+      before  { rsruby_func_stub rsruby, '%*%', [[100, 10], matrix], result }
+      subject { [100, 10] * matrix }
+      it      { should == result }
+    end
+
+    context 'robj * ruby-number' do
       let(:result) { [[10, 20], [30, 40]] }
-      before  { rsruby_func_stub rsruby, :*, [matrix, 10], result }
+      before  { rsruby_func_stub rsruby, '*', [matrix.robj, 10], result }
       subject { matrix * 10 }
       it      { should == result }
     end
 
-    context 'ruby-obj * robj' do
+    context 'ruby-number * robj' do
       let(:result) { [[10, 20], [30, 40]] }
       before  { rsruby_func_stub rsruby, :*, [10, matrix], result }
       subject { 10 * matrix }

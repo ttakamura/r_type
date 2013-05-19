@@ -2,37 +2,51 @@ module RObject
   module Helper
     module MatrixMultiply
       def * val
-        if val.respond_to?(:matrix_multiply?) && val.matrix_multiply?
+        if val.respond_to?(:is_robj_matrix_multiply?) && val.is_robj_matrix_multiply?
           R['%*%'].call self, val
         else
-          R[:*].call self, val
+          super
         end
       end
 
-      def matrix_multiply?
+      def is_robj_matrix_multiply?
         true
       end
     end
 
     module NumericDelegateR
       def + val
-        val.is_a?(RObject::Base) ? R[:+].call(self, val) : super
+        is_robj_matrix?(val) ? R[:+].call(self, val) : super
       end
 
       def - val
-        val.is_a?(RObject::Base) ? R[:-].call(self, val) : super
+        is_robj_matrix?(val) ? R[:-].call(self, val) : super
       end
 
       def / val
-        val.is_a?(RObject::Base) ? R[:/].call(self, val) : super
+        is_robj_matrix?(val) ? R[:/].call(self, val) : super
       end
 
       def * val
-        val.is_a?(RObject::Base) ? R[:*].call(self, val) : super
+        if is_robj_matrix?(val)
+          if val.respond_to?(:is_robj_matrix_multiply?) && val.is_robj_matrix_multiply? &&
+              self.respond_to?(:is_robj_matrix_multiply?) && self.is_robj_matrix_multiply?
+            R['%*%'].call(self, val)
+          else
+            R[:*].call(self, val)
+          end
+        else
+          super
+        end
       end
 
       def ** val
-        val.is_a?(RObject::Base) ? R[:**].call(self, val) : super
+        is_robj_matrix?(val) ? R[:**].call(self, val) : super
+      end
+
+      private
+      def is_robj_matrix? val
+        val.is_a?(RObject::Vector) || val.is_a?(RObject::Matrix)
       end
     end
   end
