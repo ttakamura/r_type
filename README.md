@@ -1,6 +1,19 @@
-# Robject
+# RObject
 
-TODO: Write a gem description
+RObject is a wrapper library for RSRuby.
+
+RSRuby provide to access R functions and variables from Ruby code. And, RObject wrap RSRuby's class to appropriate RObject class.
+
+## Convert R class to RObject
+
+* `numeric` => `RObject::Numeric`
+* `vector` => `RObject::Vector`
+* `matrix` => `RObject::Matrix`
+* `list` => `RObject::List`
+* `array` => `RObject::Array`
+* `data.frame` => `RObject::DataFrame`
+* `character` => `RObject::String`
+* other => `RObject::Base`
 
 ## Installation
 
@@ -18,7 +31,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute `robj_console` to open R-console
+
+```sh
+robj_console
+
+> m = matrix (1..9).to_a, ncol: 3
+=> [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+> print m * m
+     [,1] [,2] [,3]
+[1,]   30   66  102
+[2,]   36   81  126
+[3,]   42   96  150
+```
 
 ## Contributing
 
