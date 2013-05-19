@@ -34,16 +34,14 @@ module RObject
       end
 
       def init_rsruby
-        @rsruby = RSRuby.instance
         RSRuby.set_default_mode RSRuby::PROC_CONVERSION
-
-        check   = ->(x) { true }
-        convert = ->(x) { RObject::Base.convert x }
-        @rsruby.proc_table[check] = convert
-
+        converter = RObject::Convert.new
+        @rsruby = RSRuby.instance
+        @rsruby.proc_table[->(x){ true }] = ->(x) { converter.convert x }
         @rsruby
       end
 
+      private
       def reset
         @rsruby = nil
       end

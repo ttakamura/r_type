@@ -3,18 +3,16 @@ module RObject
   class Base < DelegateClass(RObj)
     attr_reader :robj
 
-    class << self
-      def convert robj
-        self.new robj
-      end
-
-      def delegate_to_R from_to
-        from_to.each do |from, to|
-          define_method(from) do |*args|
-            R[to].call @robj, *args
-          end
+    def self.delegate_to_R from_to
+      from_to.each do |from, to|
+        define_method(from) do |*args|
+          R[to].call @robj, *args
         end
       end
+    end
+
+    def self.match? robj, type
+      true
     end
 
     delegate_to_R '=~' => '==',
