@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe RObject::Base do
+describe RType::Base do
   let!(:rsruby)    { rsruby_stub }
 
-  def robject original_value
+  def r_type original_value
     rsruby_obj = double("rsruby::robj (#{original_value})")
     rsruby_obj.stub(:to_ruby).and_return original_value
-    RObject::Base.new rsruby_obj
+    RType::Base.new rsruby_obj
   end
 
-  context 'robject([1, 2, 3])' do
-    subject { robject([1,2,3]) }
+  context 'r_type([1, 2, 3])' do
+    subject { r_type([1,2,3]) }
 
     it { should be_include 3 }
     it { should == [1,2,3] }
@@ -21,13 +21,13 @@ describe RObject::Base do
 
   describe 'auto conversion' do
     describe 'R-object receive a method' do
-      subject { robject([5,6]) }
+      subject { r_type([5,6]) }
       it      { should == [5,6] }
       it      { should be_include 5 }
     end
 
     describe 'Ruby-object receive a method with R-object' do
-      subject { [5,6].include? robject(5) }
+      subject { [5,6].include? r_type(5) }
       it      { should be_true }
     end
   end
@@ -42,8 +42,8 @@ describe RObject::Base do
       it { should == response }
     end
 
-    context 'robject([1,2,3])' do
-      let(:obj) { robject([1,2,3]) }
+    context 'r_type([1,2,3])' do
+      let(:obj) { r_type([1,2,3]) }
 
       describe '+ 100' do
         subject { obj + 100 }
@@ -62,7 +62,7 @@ describe RObject::Base do
     end
 
     context 'call a Ruby-method' do
-      subject    { robject(999) }
+      subject    { r_type(999) }
       its(:to_s) { should == '999' }
     end
   end

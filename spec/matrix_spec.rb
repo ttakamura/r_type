@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RObject::Matrix do
+describe RType::Matrix do
   def robj original_value
     rsruby_obj = double("rsruby::robj (#{original_value})")
     rsruby_obj.stub(:to_ruby).and_return original_value
@@ -8,8 +8,8 @@ describe RObject::Matrix do
   end
 
   let!(:rsruby) { rsruby_stub }
-  let(:matrix)  { RObject::Matrix.new robj([[1, 2], [3, 4]]) }
-  let(:vector)  { RObject::Vector.new robj([10, 100]) }
+  let(:matrix)  { RType::Matrix.new robj([[1, 2], [3, 4]]) }
+  let(:vector)  { RType::Vector.new robj([10, 100]) }
 
   describe 'multiplication' do
     let(:result) { [[7, 10], [15, 22]] }

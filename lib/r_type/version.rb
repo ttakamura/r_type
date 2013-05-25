@@ -1,3 +1,3 @@
-module RObject
+module RType
   VERSION = "0.0.2"
 end

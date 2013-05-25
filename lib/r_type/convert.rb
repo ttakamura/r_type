@@ -1,4 +1,4 @@
-module RObject
+module RType
   class Convert
     class NotSupportTypeError < Exception; end
 

@@ -1,4 +1,4 @@
-module RObject
+module RType
   module R
     class << self
       def method_missing name, *args, &block
@@ -35,7 +35,7 @@ module RObject
 
       def init_rsruby
         RSRuby.set_default_mode RSRuby::PROC_CONVERSION
-        converter = RObject::Convert.new
+        converter = RType::Convert.new
         @rsruby = RSRuby.instance
         @rsruby.proc_table[->(x){ true }] = ->(x) { converter.convert x }
         @rsruby

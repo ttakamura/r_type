@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'robject/version'
+require 'r_type/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "robject"
-  spec.version       = RObject::VERSION
+  spec.name          = "r_type"
+  spec.version       = RType::VERSION
   spec.authors       = ["Tatsuya Takamura"]
   spec.email         = ["tkmr2000@gmail.com"]
-  spec.description   = %q{RObject is a wrapper library for RSRuby.}
-  spec.summary       = %q{RObject is a wrapper library for RSRuby.}
+  spec.description   = %q{RType is a wrapper library for RSRuby.}
+  spec.summary       = %q{RType is a wrapper library for RSRuby.}
   spec.homepage      = "https://github.com/ttakamura"
   spec.license       = "MIT"
 

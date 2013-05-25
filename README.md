@@ -1,25 +1,28 @@
-# RObject [![Build Status](https://travis-ci.org/ttakamura/robject.png?branch=master)](https://travis-ci.org/ttakamura/robject)
+# RType [![Build Status](https://travis-ci.org/ttakamura/robject.png?branch=master)](https://travis-ci.org/ttakamura/robject)
 
-RObject is a wrapper library for RSRuby.
+![r.type image](https://dl.dropboxusercontent.com/u/3111/rtype_1.png)
 
-RSRuby provide to access R functions and variables from Ruby code. And, RObject wrap RSRuby's class to appropriate RObject class.
+RType extend RSRuby to be rubyist can use R in a more Ruby way.
 
-## Convert R class to RObject
+RSRuby provide to access R functions and variables from Ruby and basic class conversion.
+And RType provide extended class conversion that convert R class to appropriate Ruby class that has many convenient methods.
 
-* `numeric` => `RObject::Numeric`
-* `vector` => `RObject::Vector`
-* `matrix` => `RObject::Matrix`
-* `list` => `RObject::List`
-* `array` => `RObject::Array`
-* `data.frame` => `RObject::DataFrame`
-* `character` => `RObject::String`
-* other => `RObject::Base`
+## Convert R class to RType
+
+* `numeric` => `RType::Numeric`
+* `vector` => `RType::Vector`
+* `matrix` => `RType::Matrix`
+* `list` => `RType::List`
+* `array` => `RType::Array`
+* `data.frame` => `RType::DataFrame`
+* `character` => `RType::String`
+* other => `RType::Base`
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'robject'
+    gem 'r_type'
 
 And then execute:
 
@@ -27,14 +30,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install robject
+    $ gem install r_type
 
 ## Usage
 
-Execute `robj_console` to open R-console
+### Interactive Console
+
+Execute `r_console` to open interactive RType console.
 
 ```sh
-robj_console
+r_console
 
 > m = matrix (1..9).to_a, ncol: 3
 => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
@@ -45,6 +50,10 @@ robj_console
 [2,]   36   81  126
 [3,]   42   96  150
 ```
+
+### Include RType to your Ruby Class
+
+
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-module RObject
+module RType
   class Base < DelegateClass(RObj)
     attr_reader :robj
 

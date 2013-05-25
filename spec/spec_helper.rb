@@ -1,9 +1,9 @@
-require File.expand_path('../../lib/robject', __FILE__)
+require File.expand_path('../../lib/r_type', __FILE__)
 
-module RObject::SpecDSL
+module RType::SpecDSL
   def rsruby_stub
     rsruby = double("rsruby")
-    RObject::R.stub(:rsruby).and_return(rsruby)
+    RType::R.stub(:rsruby).and_return(rsruby)
     proc_table = {}
     rsruby.stub(:default_mode=).with(4)
     rsruby.stub(:proc_table) { proc_table }
@@ -19,7 +19,7 @@ module RObject::SpecDSL
   end
 
   def rsruby_variable_stub rsruby, name, value
-    variable = RObject::Base.new double(name.to_s)
+    variable = RType::Base.new double(name.to_s)
     variable.stub(:to_ruby).and_return value
     variable.stub(:is_function?).and_return false
     rsruby_func_stub rsruby, :assign, [name.to_s, value], variable
@@ -30,5 +30,5 @@ end
 
 RSpec.configure do |config|
   config.mock_framework = :rspec
-  config.include RObject::SpecDSL
+  config.include RType::SpecDSL
 end

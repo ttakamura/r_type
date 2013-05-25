@@ -1,4 +1,4 @@
-module RObject
+module RType
   module Helper
     module MatrixMultiply
       def * val
@@ -46,7 +46,7 @@ module RObject
 
       private
       def is_robj_matrix? val
-        val.is_a?(RObject::Vector) || val.is_a?(RObject::Matrix)
+        val.is_a?(RType::Vector) || val.is_a?(RType::Matrix)
       end
     end
   end

@@ -1,4 +1,4 @@
-module RObject
+module RType
   class Matrix < Base
     include Helper::MatrixMultiply
 

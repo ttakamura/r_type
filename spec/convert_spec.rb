@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe RObject::Convert do
+describe RType::Convert do
   let!(:rsruby)   { rsruby_stub }
-  let(:converter) { RObject::Convert.new }
+  let(:converter) { RType::Convert.new }
 
   def robj original_value
     rsruby_obj = double("rsruby::robj (#{original_value})")
@@ -26,62 +26,62 @@ describe RObject::Convert do
     context 'DataFrame' do
       let(:value)   { { x: [1,2,3] } }
       let(:r_class) { 'data.frame' }
-      it_behaves_like 'convert RObj to', RObject::DataFrame
+      it_behaves_like 'convert RObj to', RType::DataFrame
     end
 
     context 'Function' do
       let(:value)   { 'R-function' }
       let(:r_class) { 'function' }
-      it_behaves_like 'convert RObj to', RObject::Function
+      it_behaves_like 'convert RObj to', RType::Function
     end
 
     context 'List' do
       let(:value)   { [1, 2, 3] }
       let(:r_class) { 'list' }
-      it_behaves_like 'convert RObj to', RObject::List
+      it_behaves_like 'convert RObj to', RType::List
     end
 
     context 'Array' do
       let(:value)   { [1, 2, 3] }
       let(:r_class) { 'array' }
-      it_behaves_like 'convert RObj to', RObject::Array
+      it_behaves_like 'convert RObj to', RType::Array
     end
 
     context 'Matrix' do
       let(:value)   { [[1, 2], [3, 4]] }
       let(:r_class) { 'matrix' }
-      it_behaves_like 'convert RObj to', RObject::Matrix
+      it_behaves_like 'convert RObj to', RType::Matrix
     end
 
     context 'Vector' do
       let(:length_val) { 2 }
       let(:value)   { [1, 2, 3] }
       let(:r_class) { 'numeric' }
-      it_behaves_like 'convert RObj to', RObject::Vector
+      it_behaves_like 'convert RObj to', RType::Vector
     end
 
     context 'String' do
       let(:value)   { "hello world" }
       let(:r_class) { 'character' }
-      it_behaves_like 'convert RObj to', RObject::String
+      it_behaves_like 'convert RObj to', RType::String
     end
 
     context 'Numeric' do
       let(:value)   { 99.0 }
       let(:r_class) { 'numeric' }
-      it_behaves_like 'convert RObj to', RObject::Numeric
+      it_behaves_like 'convert RObj to', RType::Numeric
     end
 
     context 'Integer' do
       let(:value)   { 31 }
       let(:r_class) { 'integer' }
-      it_behaves_like 'convert RObj to', RObject::Integer
+      it_behaves_like 'convert RObj to', RType::Integer
     end
 
     context 'Base' do
       let(:value)   { 100 }
       let(:r_class) { 'unknown' }
-      it_behaves_like 'convert RObj to', RObject::Base
+      it_behaves_like 'convert RObj to', RType::Base
     end
   end
 end
