@@ -4,15 +4,11 @@ require File.expand_path('../../lib/r_type', __FILE__)
 begin
   require 'pry'
 rescue LoadError => e
-  require 'irb'
+  puts "Can't find the Pry gem!"
+  puts "Please execute 'gem install pry' to use r_console"
+  exit 1
 end
 
-if defined? Pry
-  RType::R.run do
-    Pry.start binding, print: ->(output, value){ output.puts "=> #{value.inspect}" }
-  end
-else
-  RType::R.run do
-    IRB.start
-  end
+RType::R.run do
+  Pry.start binding, print: ->(output, value){ output.puts "=> #{value.inspect}" }
 end

@@ -1,58 +1,38 @@
 require 'spec_helper'
 
 describe RType::Matrix do
-  def robj original_value
-    rsruby_obj = double("rsruby::robj (#{original_value})")
-    rsruby_obj.stub(:to_ruby).and_return original_value
-    rsruby_obj
-  end
-
-  let!(:rsruby) { rsruby_stub }
-  let(:matrix)  { RType::Matrix.new robj([[1, 2], [3, 4]]) }
-  let(:vector)  { RType::Vector.new robj([10, 100]) }
+  let(:matrix)  { RType::R.matrix [1, 2, 3, 4], ncol: 2 }
+  let(:vector)  { RType::R.c [10, 100] }
 
   describe 'multiplication' do
-    let(:result) { [[7, 10], [15, 22]] }
-
     context 'robj * robj-matrix' do
-      before  { rsruby_func_stub rsruby, '%*%', [matrix, matrix], result }
       subject { matrix * matrix }
-      it      { should == result }
+      it      { should == [[7, 15], [10, 22]] }
     end
 
     context 'robj * robj-vector' do
-      let(:result) { [310, 420] }
-      before  { rsruby_func_stub rsruby, '%*%', [matrix, vector], result }
       subject { matrix * vector }
-      it      { should == result }
+      it      { should == [[310], [420]] }
     end
 
     context 'robj * ruby-array' do
-      let(:result) { [120, 340] }
-      before  { rsruby_func_stub rsruby, '%*%', [matrix, [100, 10]], result }
       subject { matrix * [100, 10] }
-      it      { should == result }
+      it      { should == [[130], [240]] }
     end
 
     context 'ruby-array * robj' do
-      let(:result) { [120, 340] }
-      before  { rsruby_func_stub rsruby, '%*%', [[100, 10], matrix], result }
       subject { [100, 10] * matrix }
-      it      { should == result }
+      it      { should == [120, 340] }
     end
 
     context 'robj * ruby-number' do
-      let(:result) { [[10, 20], [30, 40]] }
-      before  { rsruby_func_stub rsruby, '*', [matrix.robj, 10], result }
       subject { matrix * 10 }
-      it      { should == result }
+      it      { should == [[10, 30], [20, 40]] }
     end
 
     context 'ruby-number * robj' do
-      let(:result) { [[10, 20], [30, 40]] }
-      before  { rsruby_func_stub rsruby, :*, [10, matrix], result }
       subject { 10 * matrix }
-      it      { should == result }
+      it      { should == [[10, 30], [20, 40]] }
     end
   end
 end

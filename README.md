@@ -9,9 +9,9 @@ And RType provide extended class conversion that convert R class to appropriate 
 
 ## Convert R class to RType
 
+* `matrix` => `RType::Matrix`
 * `numeric` => `RType::Numeric`
 * `vector` => `RType::Vector`
-* `matrix` => `RType::Matrix`
 * `list` => `RType::List`
 * `array` => `RType::Array`
 * `data.frame` => `RType::DataFrame`
@@ -51,8 +51,75 @@ r_console
 [3,]   42   96  150
 ```
 
-### Include RType to your Ruby Class
+### Use RType in your Ruby Class
 
+* Simple script
+
+```ruby
+a = RType::Matrix.new [1,2,3, 4,5,6], ncol: 2
+b = RType::Matrix.new [10, 100], ncol: 1
+
+RType::R.print a * b
+
+#      [,1]
+# [1,]  410
+# [2,]  520
+# [3,]  630
+```
+
+When you haven't define `::R` constant in your code, RType define `::R` as alias of `RType::R`. So, you can write following code.
+
+```ruby
+a = R::Matrix.new [1,2,3, 4,5,6], ncol: 2
+b = R::Matrix.new [10, 100], ncol: 1
+
+R.print a * b
+```
+
+
+* In `RType::R` context
+
+`R.run` call given block in `RType::R` context.
+
+```ruby
+R.run do
+  a = matrix [1,2,3, 4,5,6], ncol: 2
+  b = matrix [10, 100], ncol: 1
+  print a * b
+end
+
+#      [,1]
+# [1,]  410
+# [2,]  520
+# [3,]  630
+```
+
+
+* Assign a variable from Ruby and use it in R
+
+Call `RType::R.eval_R` with a string that has R code.
+
+```ruby
+# assign a value from Ruby
+R.hoge = [1,2,3,4,5]
+
+# eval R code
+R.eval_R <<RTEXT
+  f = function(x) x * 100
+  result = sapply(hoge, f)
+  print(result)
+RTEXT
+```
+
+Or, you can use inline eval_R when `RType::R` context.
+
+```ruby
+R.run do
+  hoge = [1,2,3,4,5]
+  result = sapply hoge, `function(x) x * 100`
+  print result
+end
+```
 
 
 ## Contributing
