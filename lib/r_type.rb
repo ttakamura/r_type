@@ -1,5 +1,6 @@
 require 'rsruby'
 require 'delegate'
+require 'matrix'
 require File.expand_path('../r_type/version', __FILE__)
 require File.expand_path('../r_type/helper', __FILE__)
 require File.expand_path('../r_type/r', __FILE__)

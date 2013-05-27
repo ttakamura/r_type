@@ -5,7 +5,7 @@ describe RType::Base do
 
   def r_type original_value
     rsruby_obj = double("rsruby::robj (#{original_value})")
-    rsruby_obj.stub(:to_ruby).and_return original_value
+    rsruby_obj.stub(:to_ruby, anything).and_return original_value
     RType::Base.new rsruby_obj
   end
 

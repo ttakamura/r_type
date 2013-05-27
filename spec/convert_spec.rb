@@ -11,6 +11,7 @@ describe RType::Convert do
   end
 
   describe '#convert' do
+    let(:converted_value) { value }
     let(:length_val) { 0 }
 
     shared_examples_for 'convert RObj to' do |klass|
@@ -18,9 +19,10 @@ describe RType::Convert do
         rsruby.stub(:[]).with(:length).and_return double(call: length_val)
         rsruby.stub(:[]).with(:class).and_return double(call: r_class)
       end
+
       subject { converter.convert robj(value) }
       it      { should be_a klass }
-      it      { should == value }
+      it      { should == converted_value }
     end
 
     context 'DataFrame' do
@@ -50,6 +52,7 @@ describe RType::Convert do
     context 'Matrix' do
       let(:value)   { [[1, 2], [3, 4]] }
       let(:r_class) { 'matrix' }
+      let(:converted_value) { ::Matrix.rows value }
       it_behaves_like 'convert RObj to', RType::Matrix
     end
 

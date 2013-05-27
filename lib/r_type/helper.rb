@@ -49,5 +49,15 @@ module RType
         val.is_a?(RType::Vector) || val.is_a?(RType::Matrix)
       end
     end
+
+    module AsRubyCompareable
+      def == obj
+        if obj.is_a?(AsRubyCompareable)
+          to_ruby == obj.to_ruby
+        else
+          super
+        end
+      end
+    end
   end
 end
