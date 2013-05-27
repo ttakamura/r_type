@@ -18,9 +18,11 @@ describe RType::Convert do
       before do
         rsruby.stub(:[]).with(:length).and_return double(call: length_val)
         rsruby.stub(:[]).with(:class).and_return double(call: r_class)
+        @robj = robj(value)
+        ::RObj.stub(:===).with(@robj).and_return true
       end
 
-      subject { converter.convert robj(value) }
+      subject { converter.convert @robj }
       it      { should be_a klass }
       it      { should == converted_value }
     end
