@@ -3,6 +3,9 @@ require 'delegate'
 require 'matrix'
 require File.expand_path('../r_type/version', __FILE__)
 require File.expand_path('../r_type/helper', __FILE__)
+require File.expand_path('../r_type/helper/as_ruby_compareable', __FILE__)
+require File.expand_path('../r_type/helper/matrix_multiply', __FILE__)
+require File.expand_path('../r_type/helper/numeric_delegate_r', __FILE__)
 require File.expand_path('../r_type/r', __FILE__)
 require File.expand_path('../r_type/type/base', __FILE__)
 require File.expand_path('../r_type/convert', __FILE__)
