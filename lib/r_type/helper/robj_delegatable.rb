@@ -28,6 +28,10 @@ module RType
       def is_function?
         R.rsruby.is_function(@robj).to_ruby
       end
+
+      def inspect
+        "RType::#{to_ruby.inspect}"
+      end
     end
   end
 end
