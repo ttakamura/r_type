@@ -4,10 +4,11 @@ module RType
     include Helper::Compareable
     include Helper::RObjDelegatable
 
+    DelegateClassMethods = %w(I [] build column_vector columns diagonal empty identity row_vector rows scalar unit zero)
+
     class << self
       def method_missing name, *args, &block
-        supported = %w(I [] build column_vector columns diagonal empty identity row_vector rows scalar unit zero)
-        if supported.include? name.to_s
+        if DelegateClassMethods.include? name.to_s
           self.new ::Matrix.send(name, *args, &block)
         else
           super

@@ -51,6 +51,28 @@ describe RType::Matrix do
       should == 789
     end
   end
+
+  describe 'ClassMethods' do
+    describe '.I' do
+      subject { RType::Matrix.I 3 }
+      it      { should == RType::Matrix[[1,0,0], [0,1,0], [0,0,1]] }
+    end
+
+    describe '.zero' do
+      subject { RType::Matrix.zero 3 }
+      it      { should == RType::Matrix[[0,0,0], [0,0,0], [0,0,0]] }
+    end
+
+    describe '.rows' do
+      subject { RType::Matrix.rows [[1,2], [3,4]] }
+      it      { should == RType::Matrix[[1,2], [3,4]] }
+    end
+
+    describe '.columns' do
+      subject { RType::Matrix.columns [[1,2], [3,4]] }
+      it      { should == RType::Matrix[[1,3], [2,4]] }
+    end
+  end
 end
 
 describe ::Matrix do
