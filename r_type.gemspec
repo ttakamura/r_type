@@ -23,4 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 2.13.0"
   spec.add_development_dependency "rspec-mocks", "~> 2.13.0"
+  spec.add_development_dependency "guard", "~> 1.8.0"
+  spec.add_development_dependency "guard-rspec", "~> 3.0.1"
 end
