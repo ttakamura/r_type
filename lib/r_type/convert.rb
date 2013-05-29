@@ -13,7 +13,7 @@ module RType
 
     def convert robj
       type = check_R_type robj
-      [DataFrame, Function, List, Array, Matrix, String, Vector, Integer, Numeric, Base].each do |klass|
+      [Function, DataFrame, List, Array, Matrix, String, Vector, Integer, Numeric, Base].each do |klass|
         if klass.match? robj, type
           break klass.new robj
         end

@@ -36,7 +36,7 @@ describe RType::Base do
     shared_examples_for 'call a R-function' do |name, right_val, response|
       before do
         func = double("R-function")
-        func.should_receive(:call).with(obj.robj, right_val).and_return response
+        func.should_receive(:call).with(obj, right_val).and_return response
         rsruby.should_receive(:[]).with(name).and_return func
       end
       it { should == response }

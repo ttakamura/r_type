@@ -38,6 +38,16 @@ describe RType::Matrix do
       subject { 10 * matrix }
       it      { should == Matrix.rows([[10, 30], [20, 40]]) }
     end
+
+    context 'robj + ruby-number' do
+      subject { matrix + 10 }
+      it      { should == Matrix.rows([[11, 13], [12, 14]]) }
+    end
+
+    context 'ruby-number + robj' do
+      subject { 10 + matrix }
+      it      { should == Matrix.rows([[11, 13], [12, 14]]) }
+    end
   end
 
   describe '#method_missing' do

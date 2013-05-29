@@ -1,8 +1,8 @@
 module RType
   class Matrix < DelegateClass(::Matrix)
+    include Helper::RObjDelegatable
     include Helper::MatrixMultiply
     include Helper::Compareable
-    include Helper::RObjDelegatable
 
     DelegateClassMethods = %w(I [] build column_vector columns diagonal empty identity row_vector rows scalar unit zero)
 

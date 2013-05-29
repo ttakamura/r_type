@@ -8,7 +8,7 @@ module RType
           rsruby.send name, *args
         else
           obj = rsruby[name]
-          if obj.is_function?
+          if obj.is_a?(::RType::Function)
             obj.call *args
           else
             obj
