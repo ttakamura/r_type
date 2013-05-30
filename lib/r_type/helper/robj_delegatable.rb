@@ -5,26 +5,6 @@ module RType
         klass.extend ClassMethods
       end
 
-      module ClassMethods
-        def delegate_to_R *from_to
-          case from_to.first
-          when ::Hash
-            from_to.first.each do |from, to|
-              define_method(from) do |*args|
-                R[to].call self, *args
-              end
-            end
-          else
-            from_to.each do |name|
-              define_method(name) do |*args|
-                R[name].call self, *args
-              end
-            end
-          end
-        end
-      end
-      extend ClassMethods
-
       delegate_to_R '=~' => '=='
       delegate_to_R '+', '*', '-', '/', '>', '<', '>=', '<=', '|', '&', '^'
 
@@ -33,19 +13,32 @@ module RType
       end
 
       def robj
-        @robj
+        @robj ||= convert_ruby_to_robj.tap{ @ruby_obj = nil }
+      end
+
+      def ruby_obj
+        @ruby_obj ||= convert_robj_to_ruby.tap{ @robj = nil }
       end
 
       def as_r
         robj.as_r
       end
 
-      def to_ruby mode = ::RSRuby::BASIC_CONVERSION
-        @ruby_obj ||= @robj.to_ruby mode
+      def to_ruby mode = nil
+        ruby_obj
       end
 
       def inspect
-        "RType::#{to_ruby.inspect}"
+        "RType::#{(@robj || @ruby_obj).inspect}"
+      end
+
+      private
+      def convert_robj_to_ruby
+        @robj.to_ruby(::RSRuby::BASIC_CONVERSION)
+      end
+
+      def convert_ruby_to_robj
+        @ruby_obj.as_r.robj
       end
     end
   end

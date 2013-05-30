@@ -16,7 +16,7 @@ describe RType::Base do
     it { should == [1,2,3] }
 
     its(:to_ruby) { should == [1,2,3] }
-    its(:inspect) { should == 'RType::[1, 2, 3]' }
+    its('to_ruby.inspect') { should == '[1, 2, 3]' }
   end
 
   describe 'auto conversion' do

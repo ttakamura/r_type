@@ -1,6 +1,6 @@
-# RType [![Build Status](https://travis-ci.org/ttakamura/robject.png?branch=master)](https://travis-ci.org/ttakamura/robject)
+# RType [![Build Status](https://travis-ci.org/ttakamura/robject.png?branch=master)](https://travis-ci.org/ttakamura/robject) ![r.type image](https://dl.dropboxusercontent.com/u/3111/rtype_1.png)
 
-![r.type image](https://dl.dropboxusercontent.com/u/3111/rtype_1.png)
+[![Dependency Status](https://gemnasium.com/ttakamura/r_type.png)](https://gemnasium.com/ttakamura/r_type)
 
 RType extend RSRuby to be rubyist can use R in a more Ruby way.
 

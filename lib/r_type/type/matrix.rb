@@ -4,20 +4,12 @@ module RType
     include Helper::MatrixMultiply
     include Helper::Compareable
 
-    DelegateClassMethods = %w(I [] build column_vector columns diagonal empty identity row_vector rows scalar unit zero)
+    delegate_constructor ::Matrix, :I, :[], :build, :column_vector, :columns,
+                                   :diagonal, :empty, :identity, :row_vector,
+                                   :rows, :scalar, :unit, :zero
 
-    class << self
-      def method_missing name, *args, &block
-        if DelegateClassMethods.include? name.to_s
-          self.new ::Matrix.send(name, *args, &block)
-        else
-          super
-        end
-      end
-
-      def match? robj, type
-        type == 'matrix'
-      end
+    def self.match? robj, type
+      type == 'matrix'
     end
 
     def initialize obj, *args
@@ -25,13 +17,14 @@ module RType
       when ::RObj
         @robj = obj
       when ::Matrix
-        @robj = obj.as_r.robj
+        @ruby_obj = obj
       else
-        @robj = ::Matrix.send(:new, obj, *args).as_r.robj
+        raise "Not supported: #{obj} in RType::Matrix"
       end
     end
 
-    def to_ruby mode = ::RSRuby::BASIC_CONVERSION
+    private
+    def convert_robj_to_ruby
       rows = super
       ::Matrix.rows(rows.first.is_a?(::Numeric) ? [rows] : rows)
     end
