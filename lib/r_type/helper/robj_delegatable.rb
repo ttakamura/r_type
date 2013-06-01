@@ -38,7 +38,11 @@ module RType
       end
 
       def convert_ruby_to_robj
-        @ruby_obj.as_r.robj
+        if @ruby_obj.respond_to?(:as_r)
+          @ruby_obj.as_r.robj
+        else
+          R.assign('_tmp_var_for_rtype', @ruby_obj).robj
+        end
       end
     end
   end

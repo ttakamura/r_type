@@ -8,6 +8,15 @@ describe RType::Matrix do
 
   its(:to_ruby) { should == Matrix[[1, 3], [2, 4]] }
 
+  it 'should auto-convert between R and Ruby' do
+    matrix = subject
+    matrix.to_ruby.should == Matrix[[1, 3], [2, 4]]
+    matrix = matrix * 2
+    matrix.to_ruby.should == Matrix[[2, 6], [4, 8]]
+    matrix = matrix + 10
+    matrix.to_ruby.should == Matrix[[12, 16], [14, 18]]
+  end
+
   describe '#multiplication' do
     context 'robj * robj-matrix' do
       subject { matrix * matrix }

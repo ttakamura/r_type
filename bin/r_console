@@ -10,5 +10,8 @@ rescue LoadError => e
 end
 
 RType::R.run do
-  Pry.start binding, print: ->(output, value){ output.puts "=> #{value.inspect}" }
+  Pry.start binding, print: ->(output, value) do
+    value.to_ruby if value.respond_to?(:to_ruby)
+    output.puts "=> #{value.inspect}"
+  end
 end
