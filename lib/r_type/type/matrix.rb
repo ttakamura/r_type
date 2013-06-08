@@ -2,7 +2,6 @@ module RType
   class Matrix < DelegateClass(::Matrix)
     include Helper::RObjDelegatable
     include Helper::MatrixMultiply
-    include Helper::Compareable
 
     delegate_constructor ::Matrix, :I, :[], :build, :column_vector, :columns,
                                    :diagonal, :empty, :identity, :row_vector,

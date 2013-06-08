@@ -8,8 +8,12 @@ module RType
                            : from_to.inject({}) {|h,x| h[x] = x; h }
 
           from_to_hash.each do |from, to|
-            define_method(from) do |*args|
-              R[to].call self, *args
+            define_method(from) do |*args, &block|
+              if can_delegate_to_R?(*args)
+                R[to].call(self, args.first)
+              else
+                super(*args, &block)
+              end
             end
           end
         end
@@ -26,7 +30,6 @@ module RType
           end
         end
       end
-      extend ClassMethods
     end
   end
 end

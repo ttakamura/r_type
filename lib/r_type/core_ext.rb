@@ -1,21 +1,25 @@
 Fixnum.class_eval do
-  prepend RType::Helper::NumericDelegateR
-  prepend RType::Helper::BooleanDelegateR
+  prepend RType::CoreExt::NumericDelegateR
+  prepend RType::CoreExt::BooleanDelegateR
+  prepend RType::CoreExt::DelegateChecker
 end
 
 Bignum.class_eval do
-  prepend RType::Helper::NumericDelegateR
-  prepend RType::Helper::BooleanDelegateR
+  prepend RType::CoreExt::NumericDelegateR
+  prepend RType::CoreExt::BooleanDelegateR
+  prepend RType::CoreExt::DelegateChecker
 end
 
 Float.class_eval do
-  prepend RType::Helper::NumericDelegateR
-  prepend RType::Helper::BooleanDelegateR
+  prepend RType::CoreExt::NumericDelegateR
+  prepend RType::CoreExt::BooleanDelegateR
+  prepend RType::CoreExt::DelegateChecker
 end
 
 Array.class_eval do
-  prepend RType::Helper::NumericDelegateR
-  prepend RType::Helper::BooleanDelegateR
+  prepend RType::CoreExt::NumericDelegateR
+  prepend RType::CoreExt::BooleanDelegateR
+  prepend RType::CoreExt::DelegateChecker
   include RType::Helper::MatrixMultiply
 end
 

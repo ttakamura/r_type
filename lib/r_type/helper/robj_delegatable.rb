@@ -1,12 +1,15 @@
 module RType
   module Helper
     module RObjDelegatable
+      extend ClassMethods
+      include RType::CoreExt::NumericDelegateR
+      include RType::CoreExt::BooleanDelegateR
+
+      delegate_to_R '*'
+
       def self.included(klass)
         klass.extend ClassMethods
       end
-
-      delegate_to_R '=~' => '=='
-      delegate_to_R '+', '*', '-', '/', '>', '<', '>=', '<=', '|', '&', '^'
 
       def __getobj__
         to_ruby
@@ -46,6 +49,14 @@ module RType
         "RType::#{(@robj || @ruby_obj).inspect}"
       end
 
+      def == obj
+        if obj.is_a?(RObjDelegatable)
+          self.robj == obj.robj || !!R['identical'].call(self, obj)
+        else
+          super
+        end
+      end
+
       private
       def convert_robj_to_ruby
         @robj.to_ruby(::RSRuby::BASIC_CONVERSION)
@@ -57,6 +68,10 @@ module RType
         else
           R.assign('_tmp_var_for_rtype', @ruby_obj).robj
         end
+      end
+
+      def can_delegate_to_R? *args
+        true
       end
     end
   end

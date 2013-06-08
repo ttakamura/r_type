@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RType::Helper::NumericDelegateR do
+describe RType::CoreExt::NumericDelegateR do
   let(:num)    { 100 }
   let(:matrix) { RType::Matrix[[1, 3], [2, 4]] }
 

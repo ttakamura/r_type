@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RType::Helper::BooleanDelegateR do
+describe RType::CoreExt::BooleanDelegateR do
   let(:num)    { 3 }
   let(:matrix) { RType::Matrix[[1, 3], [2, 4]] }
 
