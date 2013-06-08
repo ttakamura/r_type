@@ -18,6 +18,7 @@ describe RType::Convert do
       before do
         rsruby.stub(:[]).with(:length).and_return double(call: length_val)
         rsruby.stub(:[]).with(:class).and_return double(call: r_class)
+        rsruby.stub(:[]).with(:mode).and_return 'numeric'
         @robj = robj(value)
         ::RObj.stub(:===).with(@robj).and_return true
       end

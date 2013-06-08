@@ -71,6 +71,28 @@ describe RType::Matrix do
     end
   end
 
+  describe '#=~' do
+    subject { matrix =~ 3 }
+
+    it 'Matrix[[false, true], [false, false]]' do
+      subject[1, 1].should be_false
+      subject[1, 2].should be_true
+      subject[2, 1].should be_false
+      subject[2, 2].should be_false
+    end
+  end
+
+  describe '#<' do
+    subject { matrix < 4 }
+
+    it 'Matrix[[true, true], [true, false]]' do
+      subject[1, 1].should be_true
+      subject[1, 2].should be_true
+      subject[2, 1].should be_true
+      subject[2, 2].should be_false
+    end
+  end
+
   describe 'ClassMethods' do
     describe '.I' do
       subject { RType::Matrix.I 3 }
@@ -90,6 +112,39 @@ describe RType::Matrix do
     describe '.columns' do
       subject { RType::Matrix.columns [[1,2], [3,4]] }
       it      { should == RType::Matrix[[1,3], [2,4]] }
+    end
+  end
+
+  describe '#[] accessor' do
+    context '[1, 2]' do
+      subject { matrix[1, 2] }
+      it      { should == 3  }
+    end
+
+    context '[2, 1]' do
+      subject { matrix[2, 1] }
+      it      { should == 2  }
+    end
+
+    context '[nil, 1]' do
+      subject { matrix[nil, 1]   }
+      it      { should == [1, 2] }
+    end
+
+    context '[2, nil]' do
+      subject { matrix[2, nil]   }
+      it      { should == [2, 4] }
+    end
+
+    context '[ Matrix[[true, false], [false, true]] ]' do
+      subject { matrix[ RType::Matrix[[true, false], [false, true]] ] }
+      it      { should ==  [1, 4] }
+    end
+
+    context '[ Matrix[[true, false], [false, true]] ] = 10' do
+      before  { matrix[ RType::Matrix[[true, false], [false, true]] ] = 10 }
+      subject { matrix }
+      it      { should ==  RType::Matrix[[10, 3], [2, 10]] }
     end
   end
 end

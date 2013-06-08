@@ -13,11 +13,25 @@ module RType
       end
 
       def robj
-        @robj ||= convert_ruby_to_robj.tap{ @ruby_obj = nil }
+        @robj ||= convert_ruby_to_robj.tap do |newobj|
+          @ruby_obj = nil unless newobj.nil?
+        end
       end
 
       def ruby_obj
-        @ruby_obj ||= convert_robj_to_ruby.tap{ @robj = nil }
+        @ruby_obj ||= convert_robj_to_ruby.tap do |newobj|
+          @robj = nil unless newobj.nil?
+        end
+      end
+
+      def robj= obj
+        @ruby_obj = nil
+        @robj = obj
+      end
+
+      def ruby_obj= obj
+        @robj = nil
+        @ruby_obj = obj
       end
 
       def as_r
