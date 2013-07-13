@@ -1,4 +1,4 @@
-require '../lib/r_type'
+require File.expand_path('../../lib/r_type', __FILE__)
 
 R.run do
   a = matrix [0, 1, 2, 3, 4, 5, 6, 7, 9], ncol: 3

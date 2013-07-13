@@ -1,4 +1,4 @@
-require '../lib/r_type'
+require File.expand_path('../../lib/r_type', __FILE__)
 
 R.run do
   x = (0..4).to_a
