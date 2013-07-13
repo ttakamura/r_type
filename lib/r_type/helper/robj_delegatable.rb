@@ -57,6 +57,14 @@ module RType
         end
       end
 
+      def print_inspect
+        if has_robj?
+          RType::R.print as_r
+        else
+          puts inspect
+        end
+      end
+
       private
       def convert_robj_to_ruby
         @robj.to_ruby(::RSRuby::BASIC_CONVERSION)
@@ -72,6 +80,14 @@ module RType
 
       def can_delegate_to_R? *args
         true
+      end
+
+      def has_robj?
+        !!@robj
+      end
+
+      def has_ruby_obj?
+        !!@ruby_obj
       end
     end
   end

@@ -11,7 +11,10 @@ end
 
 RType::R.run do
   Pry.start binding, print: ->(output, value) do
-    value.to_ruby if value.respond_to?(:to_ruby)
-    output.puts "=> #{value.inspect}"
+    if value.respond_to?(:print_inspect)
+      value.print_inspect
+    else
+      output.puts "=> #{value.inspect}"
+    end
   end
 end
