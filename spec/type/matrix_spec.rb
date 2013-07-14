@@ -146,6 +146,16 @@ describe RType::Matrix do
       subject { matrix }
       it      { should ==  RType::Matrix[[10, 3], [2, 10]] }
     end
+
+    context '[1..2, 2]' do
+      subject { matrix[1..2, 2]  }
+      it      { should == [3, 4] }
+    end
+
+    context '[1..2, ]' do
+      subject { matrix[1..2, nil] }
+      it      { should == RType::Matrix[[1, 3], [2, 4]] }
+    end
   end
 end
 

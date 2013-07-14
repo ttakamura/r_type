@@ -23,8 +23,8 @@ module RType::Helper::MatrixAccessor
 
   private
   def convert_nil_args_to_vector args
-    args[0] = (1..row_size).to_a    if args[0].nil? && args[1].is_a?(::Numeric)
-    args[1] = (1..column_size).to_a if args[1].nil? && args[0].is_a?(::Numeric)
+    args[0] = (1..row_size).to_a    if args[0].nil? && args.length == 2
+    args[1] = (1..column_size).to_a if args[1].nil? && args.length == 2
     args
   end
 end

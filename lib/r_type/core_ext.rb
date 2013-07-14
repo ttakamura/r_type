@@ -34,3 +34,9 @@ end
     to_s
   end
 end
+
+::Range.class_eval do
+  def as_r
+    to_a
+  end
+end
