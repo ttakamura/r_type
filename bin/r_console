@@ -9,10 +9,13 @@ rescue LoadError => e
   exit 1
 end
 
+# TODO: Change to a configuable value
+force_convert_to_r = true
+
 RType::R.run do
   Pry.start binding, print: ->(output, value) do
     if value.respond_to?(:print_inspect)
-      value.print_inspect
+      value.print_inspect(force_convert_to_r)
     else
       output.puts "=> #{value.inspect}"
     end

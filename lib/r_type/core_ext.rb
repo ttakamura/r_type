@@ -28,3 +28,9 @@ end
     ::RType::R.rbind(*self.to_a)
   end
 end
+
+::Symbol.class_eval do
+  def as_r
+    to_s
+  end
+end

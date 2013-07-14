@@ -8,7 +8,7 @@ module RType
     end
 
     def initialize robj
-      @robj = robj
+      self.robj = robj
     end
   end
 end

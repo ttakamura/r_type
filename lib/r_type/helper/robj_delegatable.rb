@@ -57,8 +57,8 @@ module RType
         end
       end
 
-      def print_inspect
-        if has_robj?
+      def print_inspect force_r_print=false
+        if has_robj? || force_r_print
           RType::R.print as_r
         else
           puts inspect
